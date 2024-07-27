@@ -20,6 +20,11 @@ spec:
     metadata:
       labels:
         app: kubexample
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io.scheme: "http"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "5000"
     spec:
       containers:
       - name: kubexample
@@ -28,3 +33,5 @@ spec:
         args:
           - echo "Starting kubexample...";
             make start
+        ports:
+        - containerPort: 5000

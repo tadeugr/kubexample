@@ -1,7 +1,8 @@
 # Import required modules
 import os
 import logging
-from flask import Flask
+from flask import Flask, request
+from prometheus_flask_exporter import PrometheusMetrics
 
 logging.basicConfig(level=logging.DEBUG,
                    format='[%(asctime)s]: {} %(levelname)s %(message)s'.format(os.getpid()),
@@ -11,6 +12,7 @@ logging.basicConfig(level=logging.DEBUG,
 logger = logging.getLogger()
 
 app = Flask(__name__)
+metrics = PrometheusMetrics(app)
 
 # Setup routes
 @app.route('/')

@@ -119,4 +119,12 @@ https://kubernetes.github.io/ingress-nginx/user-guide/monitoring/#prometheus-and
 
 https://www.aviator.co/blog/how-to-monitor-and-alert-on-nginx-ingress-in-kubernetes/
 
+
+
 https://pypi.org/project/prometheus-flask-exporter/
+
+https://stackoverflow.com/questions/77145578/configuration-for-kubernetes-flask-and-prometheus
+
+https://blog.viktoradam.net/2020/05/11/prometheus-flask-exporter/
+
+https://medium.com/devops-techable/export-metrics-from-your-python-flask-application-to-prometheus-in-kubernetes-and-watch-your-9d45164f7adc
