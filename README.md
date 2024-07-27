@@ -142,3 +142,5 @@ https://stackoverflow.com/questions/77145578/configuration-for-kubernetes-flask-
 https://blog.viktoradam.net/2020/05/11/prometheus-flask-exporter/
 
 https://medium.com/devops-techable/export-metrics-from-your-python-flask-application-to-prometheus-in-kubernetes-and-watch-your-9d45164f7adc
+
+https://github.com/rycus86/prometheus_flask_exporter/blob/master/examples/sample-signals/grafana/dashboards/example.json
