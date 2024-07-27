@@ -1,4 +1,6 @@
-.PHONY: build
+requirements:
+	pip3 install -r requirements.txt
+	
 build:
 	docker build -t kubexample:v1 .
 
