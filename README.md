@@ -108,3 +108,11 @@ make push
 ## Docker 201: Multi-Stage Builds for Production
 
 https://medium.com/@ketangangal98/docker-201-multi-stage-builds-for-production-59b1ea98924a
+
+https://github.com/rycus86/prometheus_flask_exporter/tree/master
+
+https://github.com/jonashaag/prometheus-multiprocessing-example/tree/master
+
+https://kubernetes.github.io/ingress-nginx/user-guide/monitoring/#prometheus-and-grafana-installation-using-service-monitors
+
+https://www.aviator.co/blog/how-to-monitor-and-alert-on-nginx-ingress-in-kubernetes/
