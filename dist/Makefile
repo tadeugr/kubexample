@@ -13,3 +13,7 @@ fw-kubexample:
 # Allocate a tty to a kubexample pod
 pod-tty:
 	kubectl -n kubexample exec --stdin --tty deployment/kubexample -- /bin/bash
+
+# Force deployment rollout to test HA
+force-rollout:
+	kubectl rollout restart deployment/kubexample -n kubexample

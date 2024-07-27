@@ -1,0 +1,36 @@
+---
+# aux Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: aux
+---
+# aux Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aux
+  namespace: aux
+  labels:
+    app: aux
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aux
+  template:
+    metadata:
+      labels:
+        app: aux
+    spec:
+      containers:
+      - name: aux
+        image: kubexample:v1
+        command: ["/bin/bash", "-c"]
+        args:
+          - echo "Starting aux...";
+            tail -f /dev/null
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 3000
