@@ -91,6 +91,20 @@ Make the image available in `kind`:
 make push
 ```
 
+## Deploy application
+
+kubectl port-forward svc/kubexample 8080:80 -n kubexample
+
+# Monitoring
+
+helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack --create-namespace -n monitoring
+
+kubectl get secret kube-prometheus-stack-grafana -o jsonpath="{.data.admin-password}"  -n monitoring | base64 --decode ; echo
+
+kubectl port-forward svc/kube-prometheus-stack-prometheus 9090:9090 -n monitoring
+kubectl port-forward svc/kube-prometheus-stack-grafana 3000:80 -n monitoring
+
+
 # Roadmap
 
 - Make developers' life easier by implementing Continuous Development

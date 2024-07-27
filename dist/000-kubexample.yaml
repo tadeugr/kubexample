@@ -35,3 +35,39 @@ spec:
             make start
         ports:
         - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubexample
+  namespace: kubexample
+  annotations:
+    prometheus.io/port: "web"
+    prometheus.io/scrape: "true"
+  labels:
+    app.kubernetes.io/scrape: "true"
+spec:
+  selector:
+    app: kubexample
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 5000
+      name: "web"
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: kubexample-monitor
+  namespace: monitoring
+spec:
+  endpoints:
+    - interval: 5s
+      port: web
+      scrapeTimeout: 3s
+  namespaceSelector:
+    matchNames:
+      - kubexample
+  selector:
+    matchLabels:
+      app.kubernetes.io/scrape: "true"
