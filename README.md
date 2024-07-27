@@ -20,7 +20,7 @@ The following tools are required to build and run this project.
 
 - `docker`;
 
-- `kind` and an up and running local cluster;
+- `kind` and an up and running local cluster ([reference](./kind/README.md));
 
 - `kubectl`;
 
@@ -91,6 +91,10 @@ Make the image available in `kind`:
 make push
 ```
 
+## Deploy monitoring stack
+
+Follow the instructions in [Monitoring Documentation](./monitoring/README.md)
+
 ## Deploy application
 
 ```bash
@@ -102,18 +106,29 @@ make appy
 To access the application, create a port forward (leave the process running):
 
 ```bash
-kubectl port-forward svc/kubexample 8080:80 -n kubexample
+make fw-kubexample
 ```
 
 Then access in your web browser: http://localhost:8080/payload 
 
-# Send 100 requests
+> **WARNING** the command above runs `kubectl port-forward`, and its default behaviour is to select and connect to an endpoint, which means it does not use Kubernetes Service Round Robin Load Balancer. So be aware port fowarding is suitable for spreading requests across all pods. To do so follow the instructions bellow.
 
-After you deployed the application and created the port forward to it, run:
+# Load Balance 100 requests
+
+Connect to a pod terminal by running:
 
 ```bash
-python3 bin/request_100.py
+cd dist/
+make pod-tty
 ```
+
+Then, from inside the pod, run:
+
+```bash
+./benchmark.sh
+```
+
+> **Why all this?** This is the closest we can get to a production environment. Since we are not running Kubernetes on the cloud (nor using MetalLB), there is no Kubernetes service `type: LoadBalancer`. Luckly any Kubernetes service supports under the hood a very basic Round Robin load balancing, we are just making sure we reach Kubernetes service FQDN.
 
 # Roadmap
 

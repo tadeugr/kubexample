@@ -1,9 +1,11 @@
 ---
+# kubexample Namespace
 apiVersion: v1
 kind: Namespace
 metadata:
   name: kubexample
 ---
+# kubexample Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -12,7 +14,12 @@ metadata:
   labels:
     app: kubexample
 spec:
+  # Ensure high availability 
   replicas: 3
+  strategy:
+   type: RollingUpdate
+   rollingUpdate:
+     maxUnavailable: 1
   selector:
     matchLabels:
       app: kubexample
@@ -26,6 +33,14 @@ spec:
         prometheus.io/path: "/metrics"
         prometheus.io/port: "5000"
     spec:
+      # Spread pods across nodes
+      topologySpreadConstraints:
+        - maxSkew: 1 
+          topologyKey: kubernetes.io/arch 
+          whenUnsatisfiable: DoNotSchedule 
+          labelSelector: 
+            matchLabels:
+              app: kubexample
       containers:
       - name: kubexample
         image: kubexample:v1
@@ -50,6 +65,7 @@ spec:
           periodSeconds: 3
           failureThreshold: 3
 ---
+# kubexample Service
 apiVersion: v1
 kind: Service
 metadata:
@@ -69,6 +85,7 @@ spec:
       targetPort: 5000
       name: "web"
 ---
+# kubexample Prometheus Service Monitor
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:

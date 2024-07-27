@@ -1,13 +1,48 @@
-# Monitoring
+# Deploy monitoring stack
 
-helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack --create-namespace -n monitoring  --values values.yml
+Install Prometheus and Grafana in `monitoring` namespace by running:
 
-helm upgrade kube-prometheus-stack prometheus-community/kube-prometheus-stack --namespace monitoring --values values.yml
+```bash
+make install
+```
 
-kubectl get secret kube-prometheus-stack-grafana -o jsonpath="{.data.admin-password}"  -n monitoring | base64 --decode ; echo
+# Access Prometheus
 
-kubectl port-forward svc/kube-prometheus-stack-prometheus 9090:9090 -n monitoring
-kubectl port-forward svc/kube-prometheus-stack-grafana 3000:80 -n monitoring
+Create Prometheus port forwarding:
+
+```bash
+make fw-prom
+```
+
+> Leave the command running to keep the port open.
+
+Then access in your web browser: http://localhost:9090
+
+# Access Grafana
+
+Create Grafana port forwarding:
+
+```bash
+make fw-grafana
+```
+
+> Leave the command running to keep the port open.
+
+Then access in your web browser: http://localhost:3000
+
+The user is `admin` and you can get the password by running:
+
+```bash
+make get-grafana-secret
+```
+
+## Import kubexample dashboard
+
+Copy the contets of `kubexample-dashboad.json`.
+
+Go to `Dashboards`, `New`, `Import` and paste the `json` in `Import via dashboard JSON model`.
+
+Click on `Load`.
 
 # Trobouleshoot
 
