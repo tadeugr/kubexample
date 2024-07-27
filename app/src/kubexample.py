@@ -20,6 +20,8 @@ app = Flask(__name__)
 
 # Create prometheus middleware
 metrics = PrometheusMetrics(app)
+# static information as metric
+metrics.info('app_info', 'Application info', version='0.0.1')
 
 # Find Nth number in Fibonacci sequence
 def fibonacci(n):
