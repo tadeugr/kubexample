@@ -24,6 +24,8 @@ The following tools are required to build and run this project.
 
 - `kubectl`;
 
+- `helm 3`;
+
 - `k9s` (optional);
 
 # Run the application locally (optional)
@@ -116,3 +118,5 @@ https://github.com/jonashaag/prometheus-multiprocessing-example/tree/master
 https://kubernetes.github.io/ingress-nginx/user-guide/monitoring/#prometheus-and-grafana-installation-using-service-monitors
 
 https://www.aviator.co/blog/how-to-monitor-and-alert-on-nginx-ingress-in-kubernetes/
+
+https://pypi.org/project/prometheus-flask-exporter/
