@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kubexample
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubexample
+  namespace: kubexample
+  labels:
+    app: kubexample
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kubexample
+  template:
+    metadata:
+      labels:
+        app: kubexample
+    spec:
+      containers:
+      - name: kubexample
+        image: kubexample:v1
+        command: ["/bin/bash", "-c"]
+        args:
+          - echo "Starting kubexample...";
+            make start

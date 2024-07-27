@@ -29,8 +29,10 @@ sudo apt update
 ### Install required packages
 
 ```bash
-sudo apt install git python3-pip gunicorn
+sudo apt install git python3-pip gunicorn tmux
 ```
+
+### Install Docker
 
 ```bash
 # Add Docker's official GPG key:
@@ -51,6 +53,28 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 
 sudo usermod -aG docker $USER
 newgrp docker
+```
+
+### Install kind
+
+```bash
+# For ARM64
+[ $(uname -m) = aarch64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-arm64
+chmod +x ./kind
+sudo mv ./kind /usr/local/bin/kind
+```
+
+### Install kubectl
+
+```bash
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+```
+
+### Install k9s
+
+```bash
+curl -sS https://webinstall.dev/k9s | bash
 ```
 
 ## Troubleshooting

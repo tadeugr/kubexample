@@ -20,7 +20,11 @@ The following tools are required to build and run this project.
 
 - `docker`;
 
-- `kind`
+- `kind` and an up and running local cluster;
+
+- `kubectl`;
+
+- `k9s` (optional);
 
 # Run the application locally (optional)
 
@@ -54,7 +58,9 @@ Leave the process running, and access http://127.0.0.1:5000 in your web browser.
 
 You may now terminate the process running in your terminal by pressing `CTRL + C`.
 
-# Build docker image
+# Setup docker image
+
+## Build image
 
 ```bash
 make build
@@ -66,11 +72,21 @@ Smoke test the image by running:
 docker run --rm -it -p 5000:5000 kubexample:v1
 ```
 
-If by any change you need to troubleshoot the application in the container, you can do this:
+If by any chance you need to troubleshoot the application in the container, you can do this:
 
 ```
 docker run --rm -it --entrypoint "/bin/bash" kubexample:v1
-make start
+make start-dev
+```
+
+## "Push" image
+
+> This is a dummy application running in a local cluster, so we are not using a Docker Registry.
+
+Make the image available in `kind`:
+
+```bash
+make push
 ```
 
 # Roadmap
@@ -84,6 +100,8 @@ make start
 - Make image tag dynamic. Right now it is hardcoded `kubexample:v1`;
 
 - Create different environment configurations. At this moment the webserver port is hardcoded `5000` and debug logging is enabled. You might want something different when going to a real production environment.
+
+- Setup and use Docker Registry.
 
 # References
 
