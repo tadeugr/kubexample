@@ -12,6 +12,81 @@ If you wish to use the very same environment, please follow [this documentation]
 
 The following tools are required to build and run this project.
 
-- `git`
+- `git`;
 
-- `Python 3.10.12`
+- `Python 3.10.12` (and `python3-pip`);
+
+- `make`;
+
+- `docker`;
+
+- `kind`
+
+# Run the application locally (optional)
+
+Before we go to Docker and Kubernetes, run the application locally to check if everything is OK.
+
+Go to `app` folder:
+
+```bash
+cd app
+```
+
+Install Python requirements by running:
+
+```bash
+pip3 install -r requirements.txt
+```
+
+Start the application:
+
+```bash
+make start
+```
+
+You should see somehting like this:
+
+```
+Running on http://127.0.0.1:5000
+```
+
+Leave the process running, and access http://127.0.0.1:5000 in your web browser. You should see the application home page.
+
+You may now terminate the process running in your terminal by pressing `CTRL + C`.
+
+# Build docker image
+
+```bash
+make build
+```
+
+Smoke test the image by running:
+
+```bash
+docker run --rm -it -p 5000:5000 kubexample:v1
+```
+
+If by any change you need to troubleshoot the application in the container, you can do this:
+
+```
+docker run --rm -it --entrypoint "/bin/bash" kubexample:v1
+make start
+```
+
+# Roadmap
+
+- Make developers' life easier by implementing Continuous Development
+
+  - `Phase 01`: implement `docker-compose`;
+
+  - `Phase 02`: implement https://tilt.dev/
+
+- Make image tag dynamic. Right now it is hardcoded `kubexample:v1`;
+
+- Create different environment configurations. At this moment the webserver port is hardcoded `5000` and debug logging is enabled. You might want something different when going to a real production environment.
+
+# References
+
+## Docker 201: Multi-Stage Builds for Production
+
+https://medium.com/@ketangangal98/docker-201-multi-stage-builds-for-production-59b1ea98924a
