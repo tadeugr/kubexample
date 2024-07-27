@@ -104,7 +104,7 @@ Follow the instructions in [Monitoring Documentation](./monitoring/README.md)
 
 ```bash
 cd dist
-make appy
+make apply
 ```
 > If you need to delete the application, run `make delete`
 
@@ -116,7 +116,7 @@ make fw-kubexample
 
 Then access in your web browser: http://localhost:8080/payload 
 
-> **WARNING** the command above runs `kubectl port-forward`, and its default behaviour is to select and connect to an endpoint, which means it does not use Kubernetes Service Round Robin Load Balancer. So be aware port fowarding is suitable for spreading requests across all pods. To do so follow the instructions bellow.
+> **WARNING** the command above runs `kubectl port-forward`, and its default behaviour is to select and connect to an endpoint, which means it does not use Kubernetes Service Round Robin Load Balancer. So be aware port fowarding is NOT suitable for spreading requests across all pods. To do so follow the instructions bellow.
 
 # Load Balance 100 requests
 
@@ -133,7 +133,7 @@ Then, from inside the pod, run:
 ./benchmark.sh
 ```
 
-> **Why all this?** This is the closest we can get to a production environment. Since we are not running Kubernetes on the cloud (nor using MetalLB), there is no Kubernetes service `type: LoadBalancer`. Luckly any Kubernetes service supports under the hood a very basic Round Robin load balancing, we are just making sure we reach Kubernetes service FQDN.
+> **Why all this?** This is the closest we can get to a production environment regarding Load Balancing. Since we are not running Kubernetes on the cloud (nor using MetalLB), there is no Kubernetes service `type: LoadBalancer`. Luckly any Kubernetes service supports under the hood a very basic Round Robin load balancing, we are just making sure we reach Kubernetes service FQDN.
 
 # Roadmap
 
@@ -151,28 +151,4 @@ Then, from inside the pod, run:
 
 - Consider adding `nginx` ingress.
 
-# References
-
-## Docker 201: Multi-Stage Builds for Production
-
-https://medium.com/@ketangangal98/docker-201-multi-stage-builds-for-production-59b1ea98924a
-
-https://github.com/rycus86/prometheus_flask_exporter/tree/master
-
-https://github.com/jonashaag/prometheus-multiprocessing-example/tree/master
-
-https://kubernetes.github.io/ingress-nginx/user-guide/monitoring/#prometheus-and-grafana-installation-using-service-monitors
-
-https://www.aviator.co/blog/how-to-monitor-and-alert-on-nginx-ingress-in-kubernetes/
-
-
-
-https://pypi.org/project/prometheus-flask-exporter/
-
-https://stackoverflow.com/questions/77145578/configuration-for-kubernetes-flask-and-prometheus
-
-https://blog.viktoradam.net/2020/05/11/prometheus-flask-exporter/
-
-https://medium.com/devops-techable/export-metrics-from-your-python-flask-application-to-prometheus-in-kubernetes-and-watch-your-9d45164f7adc
-
-https://github.com/rycus86/prometheus_flask_exporter/blob/master/examples/sample-signals/grafana/dashboards/example.json
+- Automatically create Grafana dashboard.
