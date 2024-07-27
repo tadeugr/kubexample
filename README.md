@@ -93,17 +93,27 @@ make push
 
 ## Deploy application
 
+```bash
+cd dist
+make appy
+```
+> If you need to delete the application, run `make delete`
+
+To access the application, create a port forward (leave the process running):
+
+```bash
 kubectl port-forward svc/kubexample 8080:80 -n kubexample
+```
 
-# Monitoring
+Then access in your web browser: http://localhost:8080/payload 
 
-helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack --create-namespace -n monitoring
+# Send 100 requests
 
-kubectl get secret kube-prometheus-stack-grafana -o jsonpath="{.data.admin-password}"  -n monitoring | base64 --decode ; echo
+After you deployed the application and created the port forward to it, run:
 
-kubectl port-forward svc/kube-prometheus-stack-prometheus 9090:9090 -n monitoring
-kubectl port-forward svc/kube-prometheus-stack-grafana 3000:80 -n monitoring
-
+```bash
+python3 bin/request_100.py
+```
 
 # Roadmap
 
@@ -118,6 +128,8 @@ kubectl port-forward svc/kube-prometheus-stack-grafana 3000:80 -n monitoring
 - Create different environment configurations. At this moment the webserver port is hardcoded `5000` and debug logging is enabled. You might want something different when going to a real production environment.
 
 - Setup and use Docker Registry.
+
+- Consider adding `nginx` ingress.
 
 # References
 
