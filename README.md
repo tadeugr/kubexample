@@ -71,13 +71,18 @@ make build
 Smoke test the image by running:
 
 ```bash
-docker run --rm -it -p 5000:5000 kubexample:v1
+cd app
+make docker-run-start
 ```
+
+> Leave the command above running.
 
 If by any chance you need to troubleshoot the application in the container, you can do this:
 
 ```
-docker run --rm -it --entrypoint "/bin/bash" kubexample:v1
+cd app
+make docker-run-bash
+# Then from inside the container, run:
 make start-dev
 ```
 
