@@ -2,6 +2,7 @@
 import os
 import logging
 import asyncio
+import random
 from flask import Flask, request, jsonify, make_response
 from prometheus_flask_exporter import PrometheusMetrics
 
@@ -17,7 +18,7 @@ metrics = PrometheusMetrics(app)
 
 def fibonacci(n):
     if n <= 0:
-        return "Invalid input. Please enter a positive integer."
+        return "ERROR: n must be > 0"
     elif n == 1:
         return 0
     elif n == 2:
@@ -32,20 +33,20 @@ def home():
 
 @app.route('/health')
 def health():
-    data = {'message': 'Healthy', 'code': 'SUCCESS'}
+    data = {'status': 'healthy'}
     return make_response(jsonify(data), 200)
 
 @app.route('/ready')
 def ready():
-    data = {'message': 'Ready', 'code': 'SUCCESS'}
+    data = {'status': 'ready'}
     return make_response(jsonify(data), 200)
 
 @app.route('/payload')
 async def payload():
-    n = 10
-    result = fibonacci(n)
-    msg = f"The {n}th Fibonacci number is: {result}"
-    data = {'message': msg, 'code': 'SUCCESS'}
+    n = random.randint(1, 10)
+    loop = asyncio.get_event_loop()
+    result = await loop.run_in_executor(None, fibonacci, n)
+    data = {'n': n, 'fibonacci' : result}
     return make_response(jsonify(data), 200)
 
 @app.route('/metrics')
