@@ -4,7 +4,7 @@
 
 # Define curl format for debugging
 CURL_FORMAT="/tmp/curl-format.txt"
-cat <<EOT >> $CURL_FORMAT
+cat <<EOT > $CURL_FORMAT
      time_namelookup:  %{time_namelookup}s\n
         time_connect:  %{time_connect}s\n
      time_appconnect:  %{time_appconnect}s\n
