@@ -118,7 +118,7 @@ Then access in your web browser: http://localhost:8080/payload
 
 > **WARNING** the command above runs `kubectl port-forward`, and its default behaviour is to select and connect to an endpoint, which means it does not use Kubernetes Service Round Robin Load Balancer. So be aware port fowarding is NOT suitable for spreading requests across all pods. To do so follow the instructions bellow.
 
-# Load Balance 100 requests
+# Load Balance requests
 
 Connect to a pod terminal by running:
 
