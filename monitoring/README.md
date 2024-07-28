@@ -75,7 +75,7 @@ Forwarding from [::1]:3000 -> 3000
 
 Then access in your web browser: http://localhost:3000
 
-The user is `admin` and you can get the password by running in another terminal:
+The user is `admin` and you can get the password by running this in another terminal:
 
 ```bash
 make get-grafana-secret

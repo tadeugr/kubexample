@@ -16,7 +16,7 @@
 ├── dist                         Kubernetes manifests to deliver the application.
 │   ├── Makefile                 Commands to install and uninstall the application.
 │   ├── aux.yaml                 Auxiliary deployment (to run the benchmark).
-│   └── kubexample.yaml          Microserver deployment.
+│   └── kubexample.yaml          Microservice deployment.
 ├── doc
 │   └── utm-ubuntu-2204-arm64.md Documentation to install a lab VM.
 ├── kind                         Kubernetes kind configuration.
@@ -153,7 +153,7 @@ make start-dev
 
 ## "Push" image
 
-> This is a dummy application running in a local cluster, so we are not using a proper Docker Registry, luckly kind has a built tool to push the image to all Kubernetes nodes..
+> This is a dummy application running in a local cluster, so we are not using a proper Docker Registry, luckily kind has a built tool to push the image to all Kubernetes nodes..
 
 Make the image available in `kind` by running:
 
@@ -204,15 +204,15 @@ Then access in your web browser: http://localhost:8080/payload
 
 You should see a `json` with the result.
 
-> **Congrats!** At this point the entire stack is up and running and you start playing around with it!
+> **Congrats!** At this point the entire stack is up and running and you can start playing around with it!
 
 > **WARNING** the command above runs `kubectl port-forward`, and its default behaviour is to select and connect to a single Kubernetes service endpoint, which means it does not use Kubernetes Service Round Robin Load Balancer. So be aware port fowarding is **NOT** suitable for spreading requests across all pods. To do so, follow the instructions bellow.
 
-You may exit the application port forward in your terminal if you don't want to access it from you browser anymore.
+You may exit the application port forward in your terminal if you don't want to access it from your browser anymore.
 
 # Load Balance requests
 
-Connect to a pod terminal by running:
+Connect to the auxiliary pod terminal by running:
 
 ```bash
 cd dist/
@@ -226,7 +226,7 @@ Then, from inside the pod, run:
 ./benchmark.sh
 ```
 
-> **Why all this?** This is the closest we can get to a production environment regarding Load Balancing. Since we are not running Kubernetes on the cloud (nor using MetalLB), there is no Kubernetes service `type: LoadBalancer`. Luckly any Kubernetes service supports under the hood a very basic Round Robin load balancing, we are just making sure we are using a Kubernetes service FQDN.
+> **Why all this?** This is the closest we can get to a production environment regarding Load Balancing. Since we are not running Kubernetes on the cloud (nor using MetalLB), there is no Kubernetes service `type: LoadBalancer`. luckily any Kubernetes service supports under the hood a very basic Round Robin Load Balancing, we are just making sure we are using a Kubernetes service FQDN.
 
 Now if go to Grafana you should see metrics being populated.
 
