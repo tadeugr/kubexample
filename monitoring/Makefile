@@ -1,3 +1,8 @@
+# Add kube-prometheus-stack helm repo
+repo-add:
+	helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+	helm repo update
+
 # Install kube-prometheus-stack
 install:
 	helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack --create-namespace -n monitoring  --values values.yml

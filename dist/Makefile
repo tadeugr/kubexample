@@ -11,8 +11,12 @@ fw-kubexample:
 	kubectl port-forward svc/kubexample 8080:80 -n kubexample
 
 # Allocate a tty to a kubexample pod
-pod-tty:
+kubexample-tty:
 	kubectl -n kubexample exec --stdin --tty deployment/kubexample -- /bin/bash
+
+# Allocate a tty to an auxiliary pod
+aux-tty:
+	kubectl -n aux exec --stdin --tty deployment/aux -- /bin/bash
 
 # Force deployment rollout to test HA
 force-rollout:
