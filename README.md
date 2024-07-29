@@ -228,6 +228,8 @@ Then, from inside the pod, run:
 
 > **Why all this?** This is the closest we can get to a production environment regarding Load Balancing. Since we are not running Kubernetes on the cloud (nor using MetalLB), there is no Kubernetes service `type: LoadBalancer`. luckily any Kubernetes service supports under the hood a very basic Round Robin Load Balancing, we are just making sure we are using a Kubernetes service FQDN.
 
+> **Why not to use an ingress?** To keep it simple at this moment, for the purpose of this project introducing one more layer of complexity could be an overkill. Although, setting up `nginx` is planned as an enhancement in the project [Roadmap](#roadmap).
+
 Now if go to Grafana you should see metrics being populated.
 
 # Roadmap
