@@ -17,7 +17,7 @@
 │   ├── Makefile                 Commands to install and uninstall the application.
 │   ├── aux.yaml                 Auxiliary deployment (to run the benchmark).
 │   └── kubexample.yaml          Microservice deployment.
-├── doc
+├── doc                          General documentation.
 │   └── utm-ubuntu-2204-arm64.md Documentation to install a lab VM.
 ├── kind                         Kubernetes kind configuration.
 │   ├── Makefile                 Commands to create and delete a cluster.
